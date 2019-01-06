@@ -1,4 +1,7 @@
 ## To do
+See if Dockerfile.release should be rewritten:
+https://hexdocs.pm/distillery/guides/working_with_docker.html
+
 https://hexdocs.pm/phoenix/testing.html#content
 
 ### Local development
@@ -96,6 +99,8 @@ iex -S mix phx.server
 
 
 ### Deploy
+https://hexdocs.pm/distillery/guides/working_with_docker.html
+https://github.com/bitwalker/distillery/blob/master/docs/guides/running_migrations.md
 
 ```
 mix release.init
@@ -104,10 +109,12 @@ mix release.init
 cd blog
 docker build -t blog_project:0.1.0 -f ./Dockerfile.release .
 
-# Run:
+# Run - first ensure that the database exists on your chosen postgres server
 docker exec -ti postgres sh
 createdb -U postgres blog_prod
 
+docker run --rm -it --name blog_project -p 4004:4000 --network phoenix -e PORT=4000 blog_project:0.1.0 migrate
+
 docker run --rm -it --name blog_project -p 4004:4000 --network phoenix -e PORT=4000 blog_project:0.1.0 foreground
-# -e HOST=blog -e DB_HOST=postgres -e DB_NAME=blog_db -e DB_USER=postgres -e DB_PASSWORD=postgres -e SECRET_KEY_BASE=A_VERY_SECRET_SECRET
+# -e HOST=blog -e DB_HOST=postgres -e DB_NAME=blog_prod -e DB_USER=postgres -e DB_PASSWORD=postgres -e SECRET_KEY_BASE=A_VERY_SECRET_SECRET
 ```
