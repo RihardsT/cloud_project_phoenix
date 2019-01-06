@@ -2,7 +2,7 @@
 https://hexdocs.pm/phoenix/testing.html#content
 
 ### Local development
-docker build -t phoenix_dev --no-cache -f ./Dockerfile_dev .
+docker build -t phoenix_dev --no-cache -f ./Dockerfile.dev .
 docker network create phoenix
 
 cd ~/Code/CloudProject/cloud_project_phoenix
@@ -92,4 +92,22 @@ mix phx.routes
 ```
 # iex with phx server running in the background
 iex -S mix phx.server
+```
+
+
+### Deploy
+
+```
+mix release.init
+
+# locally:
+cd blog
+docker build -t blog_project:0.1.0 -f ./Dockerfile.release .
+
+# Run:
+docker exec -ti postgres sh
+createdb -U postgres blog_prod
+
+docker run --rm -it --name blog_project -p 4004:4000 --network phoenix -e PORT=4000 blog_project:0.1.0 foreground
+# -e HOST=blog -e DB_HOST=postgres -e DB_NAME=blog_db -e DB_USER=postgres -e DB_PASSWORD=postgres -e SECRET_KEY_BASE=A_VERY_SECRET_SECRET
 ```
