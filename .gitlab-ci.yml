@@ -8,6 +8,8 @@ variables:
   POSTGRES_PASSWORD: postgres
 
 before_script:
+  - mix local.hex --force
+  - mix local.rebar --force
   - cd blog
   - mix deps.get
   - mix ecto.setup
