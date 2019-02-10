@@ -7,11 +7,17 @@ variables:
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
 
+cache:
+  paths:
+    - blog/deps
+    - blog/_build
+
 before_script:
   - mix local.hex --force
   - mix local.rebar --force
   - cd blog
   - mix deps.get
+  - mix compile
   - mix ecto.setup
 
 test1:
