@@ -83,6 +83,7 @@ Update versions in mix.exs file
 ```
 mix deps.get
 mix hex.outdated
+mix deps.update --all
 ```
 
 ### Notes

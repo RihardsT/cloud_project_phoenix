@@ -14,5 +14,5 @@ config :blog, Blog.Repo,
   username: "postgres",
   password: "postgres",
   database: "blog_test",
-  hostname: "localhost",
+  hostname: "postgres",
   pool: Ecto.Adapters.SQL.Sandbox
