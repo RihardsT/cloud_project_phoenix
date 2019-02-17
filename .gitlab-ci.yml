@@ -31,6 +31,8 @@ test:
 
 release:
   image: docker:latest
+  services:
+   - docker:dind
   stage: release
   when: manual
   script:
