@@ -10,7 +10,7 @@ variables:
   POSTGRES_DB: postgres
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
-  RELEASE_IMAGE: registry.gitlab.com/rihardst/cloud_project_phoenix/blog_project:0.1.0
+  RELEASE_IMAGE: registry.gitlab.com/rihardst/cloud_project_phoenix:0.1.0
 
 cache:
   untracked: true
@@ -30,10 +30,11 @@ test:
     - mix test
 
 release:
+  image: docker:latest
   stage: release
   when: manual
   script:
     - cd blog
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com/rihardst/cloud_project_phoenix
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
     - docker build -t ${RELEASE_IMAGE} -f ./Dockerfile.release .
     - docker push ${RELEASE_IMAGE}
