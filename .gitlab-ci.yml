@@ -9,8 +9,8 @@ variables:
   RELEASE_IMAGE: registry.gitlab.com/rihardst/cloud_project_phoenix/blog_project:0.1.0
 
 cache:
+  untracked: true
   paths:
-    untracked: true
     - blog/deps
     - blog/_build
 
