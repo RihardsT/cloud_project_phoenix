@@ -1,3 +1,8 @@
+stages:
+  - build
+  - test
+  - release
+
 image: elixir:alpine
 
 services:
@@ -14,21 +19,23 @@ cache:
     - blog/deps
     - blog/_build
 
-before_script:
-  - mix local.hex --force
-  - mix local.rebar --force
-  - cd blog
-  - mix deps.get
-  - mix compile
-  - mix ecto.setup
+build:
+  stage: build
+  script:
+    - mix local.hex --force
+    - mix local.rebar --force
+    - cd blog
+    - mix deps.get
+    - mix compile
+    - mix ecto.setup
 
-test1:
+test:
   stage: test
   script:
     - mix test
 
-build:
-  stage: build
+release:
+  stage: release
   when: manual
   script:
     - cd blog
