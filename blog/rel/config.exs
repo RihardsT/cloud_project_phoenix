@@ -52,6 +52,9 @@ release :blog do
   set applications: [
     :runtime_tools
   ]
+  set config_providers: [
+    ConfigTuples.Provider
+  ]
   set commands: [
     migrate: "rel/commands/migrate.sh"
   ]

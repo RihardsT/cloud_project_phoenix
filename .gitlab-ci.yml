@@ -20,6 +20,9 @@ cache:
 
 test:
   stage: test
+  only:
+    changes:
+     - blog/**/*
   script:
     - mix local.hex --force
     - mix local.rebar --force

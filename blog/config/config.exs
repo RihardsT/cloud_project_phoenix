@@ -6,6 +6,9 @@
 
 # General application configuration
 use Mix.Config
+### Trying to use module attributes instead of config_tuples
+# https://hexdocs.pm/config_tuples/readme.html
+# Code.load_file("config/docker_env.exs")
 
 config :blog,
   ecto_repos: [Blog.Repo]

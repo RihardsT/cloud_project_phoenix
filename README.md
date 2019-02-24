@@ -6,9 +6,9 @@ https://hexdocs.pm/phoenix/testing.html#content
 
 ### Local development
 docker build -t phoenix_dev --no-cache -f ./Dockerfile.dev .
-docker network create phoenix
 
 cd ~/Code/CloudProject/cloud_project_phoenix
+docker network create phoenix
 docker run --rm --name postgres --network phoenix -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres postgres:alpine
 
 <!-- .hex and .mix folder as volumes only to not have to get dependencies each time -->
@@ -107,15 +107,24 @@ https://github.com/bitwalker/distillery/blob/master/docs/guides/running_migratio
 mix release.init
 
 # locally:
-cd blog
-docker build -t blog_project:0.1.0 -f ./Dockerfile.release .
+docker build -t blog_project:0.1.0 -f blog/Dockerfile.release blog/
 
 # Run - first ensure that the database exists on your chosen postgres server
-docker exec -ti postgres sh
-createdb -U postgres blog_prod
+docker exec -ti postgres sh -c 'createdb -U postgres blog_prod'
 
-docker run --rm -it --name blog_project -p 4004:4000 --network phoenix -e PORT=4000 blog_project:0.1.0 migrate
+docker run --rm -it --name blog_project -p 4004:4000 --network phoenix -e PORT=4000 \
+  --env DB_USERNAME=postgres \
+  --env DB_PASSWORD=postgres \
+  --env DB_NAME=blog_prod \
+  --env DB_HOSTNAME=postgres \
+  --env SECRET_KEY_BASE=A_VERY_SECRET_SECRET \
+  blog_project:0.1.0 migrate
 
-docker run --rm -it --name blog_project -p 4004:4000 --network phoenix -e PORT=4000 blog_project:0.1.0 foreground
-# -e HOST=blog -e DB_HOST=postgres -e DB_NAME=blog_prod -e DB_USER=postgres -e DB_PASSWORD=postgres -e SECRET_KEY_BASE=A_VERY_SECRET_SECRET
+docker run --rm -it --name blog_project -p 4004:4000 --network phoenix -e PORT=4000 \
+  --env DB_USERNAME=postgres \
+  --env DB_PASSWORD=postgres \
+  --env DB_NAME=blog_prod \
+  --env DB_HOSTNAME=postgres \
+  --env SECRET_KEY_BASE=A_VERY_SECRET_SECRET \
+  blog_project:0.1.0 foreground
 ```
