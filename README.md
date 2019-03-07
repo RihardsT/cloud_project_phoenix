@@ -3,6 +3,10 @@ See if Dockerfile.release should be rewritten:
 https://hexdocs.pm/distillery/guides/working_with_docker.html
 
 https://hexdocs.pm/phoenix/testing.html#content
+- [ ] test that header has working links to pages
+  - [ ] Make header
+- [ ] Test that authentication is required for Articles and everything
+  - [ ] Implement auth
 
 ### Local development
 docker build -t phoenix_dev --no-cache -f ./Dockerfile.dev .
