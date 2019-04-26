@@ -1,7 +1,6 @@
 stages:
   - test
   - release
-  - dast
 
 include:
   - template: SAST.gitlab-ci.yml
@@ -51,10 +50,9 @@ release:
     - docker push ${RELEASE_IMAGE}
 
 container_scanning:
-  stage: release
   variables:
     CI_APPLICATION_REPOSITORY: registry.gitlab.com/rihardst/cloud_project_phoenix
     CI_APPLICATION_TAG: 0.1.0
 
 dast:
-  stage: release
+  stage: test
