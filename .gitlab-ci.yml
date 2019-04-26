@@ -14,8 +14,6 @@ variables:
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
   RELEASE_IMAGE: registry.gitlab.com/rihardst/cloud_project_phoenix:0.1.0
-  CI_APPLICATION_REPOSITORY: registry.gitlab.com/rihardst/cloud_project_phoenix
-  CI_APPLICATION_TAG: 0.1.0
 
 cache:
   untracked: true
@@ -51,3 +49,8 @@ release:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
     - docker build -t ${RELEASE_IMAGE} -f ./Dockerfile.release .
     - docker push ${RELEASE_IMAGE}
+
+container_scanning:
+  variables:
+    CI_APPLICATION_REPOSITORY: registry.gitlab.com/rihardst/cloud_project_phoenix
+    CI_APPLICATION_TAG: 0.1.0
