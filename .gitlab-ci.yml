@@ -1,6 +1,8 @@
 stages:
   - test
   - release
+include:
+  template: SAST.gitlab-ci.yml
 
 image: elixir:alpine
 
