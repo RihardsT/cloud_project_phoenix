@@ -1,9 +1,7 @@
 stages:
   - test
   - release
-image: elixir:alpine
-services:
-  - postgres:alpine
+  - dast
 
 include:
   template: SAST.gitlab-ci.yml
@@ -11,7 +9,6 @@ include:
   template: DAST.gitlab-ci.yml
 
 variables:
-  DAST_WEBSITE: https://rudenspavasaris.id.lv
   POSTGRES_DB: postgres
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
@@ -24,6 +21,9 @@ cache:
     - blog/_build
 
 test:
+  image: elixir:alpine
+  services:
+    - postgres:alpine
   stage: test
   only:
     changes:
@@ -48,3 +48,8 @@ release:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
     - docker build -t ${RELEASE_IMAGE} -f ./Dockerfile.release .
     - docker push ${RELEASE_IMAGE}
+
+dast:
+  stage: dast
+  variables:
+    DAST_WEBSITE: https://rudenspavasaris.id.lv
