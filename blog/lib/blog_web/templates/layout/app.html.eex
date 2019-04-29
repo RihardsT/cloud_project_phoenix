@@ -11,13 +11,18 @@
   </head>
   <body>
     <header>
-      
+      <div class="ui stackable menu container">
+        <a href="/" class="item">Sākums</a>
+        <a href="/" class="item">Par</a>
+      </div>
     </header>
-    <main role="main" class="container">
+
+    <main role="main" class="ui container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= render @view_module, @view_template, assigns %>
     </main>
+
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

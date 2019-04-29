@@ -17,10 +17,10 @@ docker run --rm --name postgres --network phoenix -e POSTGRES_PASSWORD=postgres 
 
 <!-- .hex and .mix folder as volumes only to not have to get dependencies each time -->
 docker run --rm -it --user $(id -u):$(id -g) --name phoenix -p 4000:4000 --network phoenix -v $PWD:/d -v $PWD/.mix:/.mix -v $PWD/.hex:/.hex -w /d phoenix_dev sh
-cd blog && mix deps.get && mix ecto.setup && mix phx.server
+cd /d/blog && mix deps.get && mix ecto.setup && mix phx.server
 
 docker exec -ti phoenix sh
-cd blog
+cd /d/blog
 
 ### Starting new app
 ```
