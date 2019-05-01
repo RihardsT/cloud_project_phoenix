@@ -13,6 +13,7 @@
     <header>
       <div class="ui stackable menu container">
         <a href="/" class="item">Sākums</a>
+        <a href="<%= Routes.article_path(@conn, :index) %>" class="item">Neregulāri raksti</a>
         <a href="/" class="item">Par</a>
       </div>
     </header>
