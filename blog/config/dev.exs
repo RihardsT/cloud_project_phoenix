@@ -65,3 +65,9 @@ config :blog, Blog.Repo,
   database: "blog_dev",
   hostname: "postgres",
   pool_size: 10
+
+config :blog, basic_auth_config: [
+  username: "admin",
+  password: "admin",
+  realm: "Articles"
+]

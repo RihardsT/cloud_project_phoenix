@@ -3,8 +3,6 @@ See if Dockerfile.release should be rewritten:
 https://hexdocs.pm/distillery/guides/working_with_docker.html
 
 https://hexdocs.pm/phoenix/testing.html#content
-- [ ] test that header has working links to pages
-  - [ ] Make header
 - [ ] Test that authentication is required for Articles and everything
   - [ ] Implement auth
 
@@ -120,7 +118,10 @@ docker run --rm -it --name blog_project -p 4004:4000 --network phoenix -e PORT=4
   --env DB_PASSWORD=postgres \
   --env DB_NAME=blog_prod \
   --env DB_HOSTNAME=postgres \
-  --env SECRET_KEY_BASE=A_VERY_SECRET_SECRET \
+  --env SECRET_KEY_BASE=A_VERY_SECRET_SECRET_GOES_HERE \
+  --env BASIC_AUTH_USERNAME=USERNAME_GOES_HERE \
+  --env BASIC_AUTH_PASSWORD=A_VERY_SECURE_PASSWORD_GOES_HERE \
+  --env BASIC_AUTH_REALM=REALM_GOES_HERE \
   blog_project:0.1.0 migrate
 
 docker run --rm -it --name blog_project -p 4004:4000 --network phoenix -e PORT=4000 \
@@ -128,6 +129,9 @@ docker run --rm -it --name blog_project -p 4004:4000 --network phoenix -e PORT=4
   --env DB_PASSWORD=postgres \
   --env DB_NAME=blog_prod \
   --env DB_HOSTNAME=postgres \
-  --env SECRET_KEY_BASE=A_VERY_SECRET_SECRET \
+  --env SECRET_KEY_BASE=A_VERY_SECRET_SECRET_GOES_HERE \
+  --env BASIC_AUTH_USERNAME=USERNAME_GOES_HERE \
+  --env BASIC_AUTH_PASSWORD=A_VERY_SECURE_PASSWORD_GOES_HERE \
+  --env BASIC_AUTH_REALM=REALM_GOES_HERE \
   blog_project:0.1.0 foreground
 ```

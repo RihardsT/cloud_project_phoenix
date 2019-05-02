@@ -16,3 +16,9 @@ config :blog, Blog.Repo,
   database: "blog_test",
   hostname: "postgres",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :blog, basic_auth_config: [
+  username: "admin",
+  password: "admin",
+  realm: "Articles"
+]
