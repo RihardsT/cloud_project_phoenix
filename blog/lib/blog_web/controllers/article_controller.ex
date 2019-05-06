@@ -11,6 +11,10 @@ defmodule BlogWeb.ArticleController do
   end
 
   def new(conn, _params) do
+    # https://github.com/CultivateHQ/basic_auth/issues/49
+    # https://github.com/CultivateHQ/basic_auth/blob/master/lib/basic_auth.ex#L40 led me to
+    # IO.puts "Typical string with #{Plug.Conn.get_req_header(conn, "authorization")}"
+    IO.puts "Typical string with #{Blog.Helpers.Auth.authorized?(conn)}"
     changeset = Articles.change_article(%Article{})
     render(conn, "new.html", changeset: changeset)
   end

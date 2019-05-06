@@ -26,5 +26,15 @@
 <% end %>
   </tbody>
 </table>
+<!--
+<h5>This <%= Blog.Helpers.Auth.authorized?(@conn) %> </h5>
+<h5>This <%= Plug.Conn.get_req_header(@conn, "authorization") %> </h5>
 
 <span><%= link "New Article", to: Routes.article_path(@conn, :new) %></span>
+-->
+
+<!--
+<%= if Blog.Helpers.Auth.authorized?(@conn) do %>
+  <span><%= link "New Article", to: Routes.article_path(@conn, :new) %></span>
+<% end %>
+-->
