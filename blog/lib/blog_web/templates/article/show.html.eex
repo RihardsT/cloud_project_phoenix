@@ -1,23 +1,9 @@
-<h1>Show Article</h1>
+<h1><%= @article.title %></h1>
 
-<ul>
+<strong>Published:</strong>
+<%= @article.published %>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @article.title %>
-  </li>
-
-  <li>
-    <strong>Content:</strong>
-    <%= @article.content %>
-  </li>
-
-  <li>
-    <strong>Published:</strong>
-    <%= @article.published %>
-  </li>
-
-</ul>
+<%= {:safe, Earmark.as_html!(@article.content)} %>
 
 <span><%= link "Edit", to: Routes.article_path(@conn, :edit, @article) %></span>
 <span><%= link "Back", to: Routes.article_path(@conn, :index) %></span>

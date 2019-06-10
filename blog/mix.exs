@@ -45,7 +45,8 @@ defmodule Blog.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:distillery, "~> 2.0"},
       {:config_tuples, "~> 0.2.0"},
-      {:basic_auth, "~> 2.2.2"}
+      {:basic_auth, "~> 2.2.2"},
+      {:earmark, ">= 1.3.2"}
     ]
   end
 

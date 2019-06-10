@@ -1,6 +1,6 @@
 defmodule BlogWeb.ArticleController do
   use BlogWeb, :controller
-  plug BasicAuth, [use_config: {:blog, :basic_auth_config}] when not action in [:index, :show]
+  plug BasicAuth, [use_config: {:blog, :basic_auth_config}] when action not in [:index, :show]
 
   alias Blog.Articles
   alias Blog.Articles.Article
